@@ -21,6 +21,11 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         btn = findViewById(R.id.button);
         btn.setOnClickListener((e)->{
+
+
+
+
+
             
         });
 
