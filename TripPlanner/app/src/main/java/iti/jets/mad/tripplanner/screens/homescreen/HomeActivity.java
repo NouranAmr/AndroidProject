@@ -7,6 +7,9 @@ import iti.jets.mad.tripplanner.R;
 
 public class HomeActivity extends AppCompatActivity {
 
+    public HomeActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
