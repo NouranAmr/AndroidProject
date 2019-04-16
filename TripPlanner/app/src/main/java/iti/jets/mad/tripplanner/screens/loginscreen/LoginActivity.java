@@ -38,4 +38,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void clearTxt() {
+        password.setText("");
+        email.setText("");
+
+    }
 }

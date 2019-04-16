@@ -106,6 +106,8 @@ public class RegisterPresenterImpl implements RegisterContract.RegisterPresenter
                             //Intent intent= new Intent(context, NoteList.class);
                            // context.startActivity(intent);
                             updateMessage("Login with google Sucessfully");
+                            Intent intent = new Intent(context, HomeActivity.class);
+                            context.startActivity(intent);
 
                         } else {
                             // If sign in fails, display a message to the user.

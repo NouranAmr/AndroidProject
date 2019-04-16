@@ -38,6 +38,7 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
                         if(task.isSuccessful()) {
                             updateMessage("sign in Successfully");
                             toHomeActivity();
+                            //clearViewTxt();
                         }
                         else
                         {
@@ -57,5 +58,10 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     @Override
     public void updateMessage(String message) {
         loginView.showToast(message);
+    }
+
+    @Override
+    public void clearViewTxt() {
+        loginView.clearTxt();
     }
 }
