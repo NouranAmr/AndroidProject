@@ -3,6 +3,7 @@ package iti.jets.mad.tripplanner.screens.addtripscreen;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -12,6 +13,13 @@ import java.util.Date;
 import iti.jets.mad.tripplanner.R;
 import iti.jets.mad.tripplanner.model.Note;
 import iti.jets.mad.tripplanner.model.Trip;
+
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+
 
 public class AddTripActivity extends AppCompatActivity implements AddTripContract.IView {
 
@@ -23,6 +31,8 @@ public class AddTripActivity extends AppCompatActivity implements AddTripContrac
 
     String currentUserUID;
     String currentUserName;
+
+    private static final String TAG = "PlaceAutocomplete";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +46,46 @@ public class AddTripActivity extends AppCompatActivity implements AddTripContrac
         mDatabase = mFirebaseDatabase.getReference().child("Trips").child(currentUserUID);
         // [END initialize_database_ref]
 
+        /////place auto compleat/////
+        // from
+        initPlaceAutocomplete(R.id.place_autocomplete_fragment_from);
+        // to
+        initPlaceAutocomplete(R.id.place_autocomplete_fragment_to);
+        ///////////end place auto compleat////////////
+
 
     }
 
+    private void initPlaceAutocomplete(int place_autocomplete_fragment)
+    {
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(place_autocomplete_fragment);
+
+        AutocompleteFilter filter = new AutocompleteFilter.Builder()
+                .setCountry("EG")
+                .build();
+        autocompleteFragment.setFilter(filter);
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                if(place_autocomplete_fragment == R.id.place_autocomplete_fragment_from)
+                {
+                    //start Point
+                }
+                else
+                {
+                    //end Point
+                }
+                String placeName = place.getName().toString();
+                Toast.makeText(AddTripActivity.this, placeName, Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onError(Status status) {
+                Log.i(TAG, "An error occurred: " + status);
+                Toast.makeText(AddTripActivity.this, status.getStatus().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     private void addNewTrip(String tripName, String startPoint, String endPoint, Date tripDate , Note tripNote)
     {
         Trip trip=new Trip(tripName,startPoint,endPoint,tripDate,tripNote);

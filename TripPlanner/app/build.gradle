@@ -46,6 +46,10 @@ dependencies {
     ////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////radya///////////////////////////////////////
 
+    implementation 'com.google.android.libraries.places:places:1.1.0'
+    implementation 'com.google.android.gms:play-services-places:16.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+
     //////////////////////////////////////////////////////////////////////////////
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
