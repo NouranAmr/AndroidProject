@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import iti.jets.mad.tripplanner.R;
+import iti.jets.mad.tripplanner.screens.homescreen.HomeActivity;
 import iti.jets.mad.tripplanner.screens.loginscreen.LoginActivity;
 
 public class RegisterPresenterImpl implements RegisterContract.RegisterPresenter{
@@ -49,6 +50,7 @@ public class RegisterPresenterImpl implements RegisterContract.RegisterPresenter
                                                if(task.isSuccessful())
                                                {
                                                    Toast.makeText(context,"Registerd Suceesfully", Toast.LENGTH_SHORT).show();
+                                                   toHomeActivity();
                                                    Log.i(TAG,task.getResult().toString());
                                                }
                                                else
@@ -72,7 +74,7 @@ public class RegisterPresenterImpl implements RegisterContract.RegisterPresenter
     @Override
     public void toHomeActivity() {
 
-        Intent intent = new Intent(context, LoginActivity.class);
+        Intent intent = new Intent(context, HomeActivity.class);
         context.startActivity(intent);
     }
 

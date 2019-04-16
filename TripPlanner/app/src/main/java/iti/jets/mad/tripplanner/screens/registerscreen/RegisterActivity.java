@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
                 String email=emailtxt.getText().toString().trim();
                 if(password.equals(repassword)) {
                     registerPresenter.register(password, email);
-                    registerPresenter.toHomeActivity();
+                    
                 }
                 else
                 {

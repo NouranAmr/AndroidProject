@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import iti.jets.mad.tripplanner.screens.homescreen.HomeActivity;
 import iti.jets.mad.tripplanner.screens.registerscreen.RegisterActivity;
 import iti.jets.mad.tripplanner.screens.registerscreen.RegisterContract;
 
@@ -49,7 +50,7 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
 
     @Override
     public void toHomeActivity() {
-        Intent intent= new Intent(context, RegisterActivity.class);
+        Intent intent= new Intent(context, HomeActivity.class);
         context.startActivity(intent);
     }
 
