@@ -1,50 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="50dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screens.homescreen.HomeActivity">
 
-    >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="100"
-        android:paddingTop="10dp"
-        >
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upcoming"
-            android:layout_weight="50"
-            android:id="@+id/upcomingBtnID"
-            android:textAllCaps="false"
-            android:background="@drawable/custom_button"
-            android:textColor="#fff"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Past"
-            android:layout_weight="50"
-            android:id="@+id/PastBtnID"
-            android:textAllCaps="false"
-            android:background="@drawable/custom_button"
-            android:textColor="#fff"/>
-
-    </LinearLayout>
-    
-    <LinearLayout
-        android:paddingTop="10dp"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/pastRecycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/fragment_container2">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></android.support.v7.widget.RecyclerView>
 
-    </LinearLayout>
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

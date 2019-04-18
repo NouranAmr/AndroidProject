@@ -23,6 +23,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         email=findViewById(R.id.emailTxt);
         password=findViewById(R.id.passwordTxt);
         signin=findViewById(R.id.signinBtn);
+        loginPresenter.getSharedPreferences();
+
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

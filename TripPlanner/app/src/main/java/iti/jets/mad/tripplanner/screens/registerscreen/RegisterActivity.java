@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.common.SignInButton;
 
@@ -21,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     private EditText nametxt , emailtxt, passtxt,repasstxt;
     private RegisterPresenterImpl registerPresenter;
     private SignInButton googleButton;
+    private boolean flag=false;
 
 
 
@@ -38,6 +40,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         passtxt=findViewById(R.id.passwordTxt);
         repasstxt=findViewById(R.id.repasswordTxt);
         googleButton=findViewById(R.id.googleBtn);
+        flag=getIntent().getBooleanExtra("flag",false);
+        registerPresenter.sharedPreferences(emailtxt.getText().toString(),passtxt.getText().toString(),flag);
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,11 +56,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
                 String password=passtxt.getText().toString();
                 String repassword=repasstxt.getText().toString();
                 String email=emailtxt.getText().toString().trim();
-                if(password.equals(repassword)) {
+                if(password.equals(repassword) && registerPresenter.validateEmail(email)&&registerPresenter.validatePassword(password)&&registerPresenter.validateUsername(name)) {
+
                     registerPresenter.register(password, email);
-                    
+
                 }
-                else
+                else if(!password.equals(repassword))
                 {
                     repasstxt.setError("Password Not Match");
                 }
@@ -76,7 +81,22 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     @Override
     public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void errorEmail(String message) {
+        emailtxt.setError(message);
+    }
+
+    @Override
+    public void errorPassword(String message) {
+        passtxt.setError(message);
+    }
+
+    @Override
+    public void errorUserName(String message) {
+        nametxt.setError(message);
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

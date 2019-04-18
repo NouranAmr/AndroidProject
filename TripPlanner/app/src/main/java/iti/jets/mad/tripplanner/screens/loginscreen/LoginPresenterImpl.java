@@ -2,6 +2,7 @@ package iti.jets.mad.tripplanner.screens.loginscreen;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
@@ -19,6 +20,9 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     private FirebaseAuth firebaseAuth;
     private Context context;
     private LoginContract.LoginView loginView;
+    private static final String SETTING_INFOS = "User_Info";
+    private static final String EMAIL = "Email";
+    private static final String PASSWORD = "PASSWORD";
 
     public LoginPresenterImpl(LoginContract.LoginView loginView) {
 
@@ -38,7 +42,9 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
                         if(task.isSuccessful()) {
                             updateMessage("sign in Successfully");
                             toHomeActivity();
-                            //clearViewTxt();
+                            sharedPreferences(email,password);
+                            clearViewTxt();
+
                         }
                         else
                         {
@@ -63,5 +69,24 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     @Override
     public void clearViewTxt() {
         loginView.clearTxt();
+    }
+    @Override
+    public void sharedPreferences(String email, String password) {
+        SharedPreferences settings = context.getSharedPreferences(SETTING_INFOS, 0);
+        settings.edit()
+                .putString(EMAIL, email)
+                .putString(PASSWORD,password)
+                .commit();
+    }
+
+    @Override
+    public void getSharedPreferences() {
+        SharedPreferences settings = context.getSharedPreferences(SETTING_INFOS, 0);
+        if(settings.contains(EMAIL))
+        {
+            String name = settings.getString(EMAIL, "");
+            String Password = settings.getString(PASSWORD, "");
+            context.startActivity(new Intent(context,HomeActivity.class));
+        }
     }
 }

@@ -1,8 +1,5 @@
 package iti.jets.mad.tripplanner.screens.loginscreen;
 
-import android.content.Intent;
-
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 public interface LoginContract {
     interface LoginView {
@@ -16,6 +13,8 @@ public interface LoginContract {
         void toHomeActivity();
         void updateMessage(String message);
         void clearViewTxt();
+        void sharedPreferences(String email,String password);
+        void getSharedPreferences();
 
     }
 }
